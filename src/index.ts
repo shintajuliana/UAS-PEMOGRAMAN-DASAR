@@ -1,9 +1,5 @@
 import readlineSync from "readline-sync";
 
-// ============================================================
-// TIPE DATA BARANG
-// ============================================================
-
 type Barang = {
     id: string;
     nama: string;
@@ -11,10 +7,6 @@ type Barang = {
     harga: number;
     stok: number;
 };
-
-// ============================================================
-// DATA AWAL (SEED DATA)
-// ============================================================
 
 let daftarBarang: Barang[] = [
     { id: "BR001", nama: "Indomie Goreng", kategori: "Makanan", harga: 3500, stok: 50 },
@@ -24,9 +16,7 @@ let daftarBarang: Barang[] = [
     { id: "BR005", nama: "Kopi Good Day", kategori: "Minuman", harga: 2500, stok: 40 }
 ];
 
-// ============================================================
 // FUNGSI UMUM
-// ============================================================
 
 // Fungsi tanpa parameter dan tanpa return
 function tampilkanGaris(): void {
@@ -110,4 +100,52 @@ function hitungTotalNilaiStok(): number {
     }
 
     return totalNilai;
+}
+
+// ============================================================
+// 1. CREATE - MENAMBAHKAN BARANG
+// ============================================================
+
+function tambahBarang(): void {
+    tampilkanGaris();
+    console.log("                 TAMBAH BARANG");
+    tampilkanGaris();
+
+    let id = inputTeks("Masukkan ID barang: ").toUpperCase();
+
+    // Validasi agar ID tidak duplikat
+    while (cariBarangById(id) !== undefined) {
+        console.log("ID sudah digunakan. Masukkan ID berbeda.");
+        id = inputTeks("Masukkan ID barang: ").toUpperCase();
+    }
+
+    const nama = inputTeks("Masukkan nama barang: ");
+    const kategori = inputTeks("Masukkan kategori barang: ");
+    const harga = inputAngka("Masukkan harga barang (Rp): ", 1, true);
+    const stok = inputAngka("Masukkan jumlah stok: ", 0);
+
+    // Nested if untuk menentukan kondisi stok
+    if (stok === 0) {
+        console.log("Perhatian: Barang tersimpan dengan status HABIS.");
+    } else {
+        if (stok <= 5) {
+            console.log("Perhatian: Stok barang tergolong sedikit.");
+        } else {
+            console.log("Stok barang mencukupi.");
+        }
+    }
+
+    const barangBaru: Barang = {
+        id,
+        nama,
+        kategori,
+        harga,
+        stok
+    };
+
+    // Menambahkan barang menggunakan push
+    daftarBarang.push(barangBaru);
+
+    console.log("\nBarang berhasil ditambahkan!");
+    tampilkanDetailBarang(barangBaru);
 }
