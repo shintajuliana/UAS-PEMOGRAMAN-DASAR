@@ -149,3 +149,68 @@ function tambahBarang(): void {
     console.log("\nBarang berhasil ditambahkan!");
     tampilkanDetailBarang(barangBaru);
 }
+
+// ============================================================
+// 2. READ - MENAMPILKAN SELURUH BARANG
+// ============================================================
+
+function tampilkanSemuaBarang(): void {
+    tampilkanGaris();
+    console.log("              DAFTAR INVENTARIS TOKO");
+    tampilkanGaris();
+
+    if (daftarBarang.length === 0) {
+        console.log("Belum ada data barang.");
+        return;
+    }
+
+    console.log(
+        "ID".padEnd(9) +
+        "NAMA BARANG".padEnd(22) +
+        "KATEGORI".padEnd(14) +
+        "HARGA".padEnd(14) +
+        "STOK".padEnd(8) +
+        "STATUS"
+    );
+
+    tampilkanGaris();
+
+    // Perulangan for untuk menampilkan data
+    for (let i = 0; i < daftarBarang.length; i++) {
+        const barang = daftarBarang[i];
+
+        if (!barang) {
+            continue;
+        }
+
+        const status = barang.stok > 0 ? "Tersedia" : "Habis";
+
+        console.log(
+            barang.id.padEnd(9) +
+            barang.nama.substring(0, 20).padEnd(22) +
+            barang.kategori.substring(0, 12).padEnd(14) +
+            Rp${barang.harga.toLocaleString("id-ID")}.padEnd(14) +
+            String(barang.stok).padEnd(8) +
+            status
+        );
+    }
+
+    tampilkanGaris();
+
+    console.log(Jumlah jenis barang: ${hitungJumlahJenisBarang()});
+
+    console.log(
+        Total nilai persediaan: Rp${hitungTotalNilaiStok().toLocaleString("id-ID")}
+    );
+
+    // Menghitung jumlah barang dengan stok genap
+    let jumlahStokGenap = 0;
+
+    daftarBarang.forEach((barang: Barang) => {
+        if (barang.stok % 2 === 0) {
+            jumlahStokGenap++;
+        }
+    });
+
+    console.log(Jumlah barang dengan stok genap: ${jumlahStokGenap});
+}
