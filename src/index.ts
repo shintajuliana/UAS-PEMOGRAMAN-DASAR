@@ -104,3 +104,52 @@ function hitungTotalNilaiStok(): number {
 
     return totalNilai;
 }
+
+// ============================================================
+// CREATE - MENAMBAHKAN BARANG
+// ============================================================
+
+function tambahBarang(): void {
+    tampilkanGaris();
+    console.log("                 TAMBAH BARANG");
+    tampilkanGaris();
+
+    let id = inputTeks("Masukkan ID barang: ").toUpperCase();
+
+    // Validasi ID agar tidak duplikat
+    while (cariBarangById(id) !== undefined) {
+        console.log("ID sudah digunakan. Masukkan ID yang berbeda.");
+        id = inputTeks("Masukkan ID barang: ").toUpperCase();
+    }
+
+    const nama = inputTeks("Masukkan nama barang: ");
+    const kategori = inputTeks("Masukkan kategori barang: ");
+    const harga = inputAngka("Masukkan harga barang (Rp): ", 1, true);
+    const stok = inputAngka("Masukkan jumlah stok: ", 0);
+
+    // Menentukan status berdasarkan stok
+    if (stok >= 0) {
+        if (stok === 0) {
+            console.log("Perhatian: barang akan tersimpan dengan status HABIS.");
+        } else {
+            if (stok <= 5) {
+                console.log("Perhatian: stok barang tergolong sedikit.");
+            } else {
+                console.log("Stok barang mencukupi.");
+            }
+        }
+    }
+
+    const barangBaru: Barang = {
+        id,
+        nama,
+        kategori,
+        harga,
+        stok
+    };
+
+    daftarBarang.push(barangBaru);
+
+    console.log("\nBarang berhasil ditambahkan!");
+    tampilkanDetailBarang(barangBaru);
+}
