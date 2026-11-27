@@ -12,7 +12,7 @@
    Nim:263140707111071
    Akun:rafifahnadiap
    Kontribusi:
-4. Nama:
-   Nim:
-   Akun:
+4. Nama: Ananti Putri Syafa
+   Nim: 263140707111066
+   Akun: anantisyafa
    Kontribusi:
