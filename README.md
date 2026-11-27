@@ -4,7 +4,7 @@
    Nim: 263140707111072
    Akun: marsyaagustin
    Kontribusi: 
-2. Nama: shinta juliana
+2. Nama: Shinta juliana
    Nim:263140707111053
    Akun: shintajuliana
    Kontribusi :
